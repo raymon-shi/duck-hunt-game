@@ -1,0 +1,126 @@
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
+@SuppressWarnings("serial")
+public class Duck extends Rectangle implements Bird {
+	private String name;
+	
+	private int height;
+	private int width;
+	private int heightStart;
+	private int widthStart;
+	
+	private int xPosition;
+	private int yPosition;
+	
+	private double xSpeed;
+	private double ySpeed;
+	
+	private int xSpeedStart;
+	private int ySpeedStart;
+	
+	private int points;
+	private int pointsStart;
+
+	
+	public Duck() {
+		name = "Duck";
+		height = 150;
+		heightStart = 120;
+		width = 200;
+		widthStart = 160;
+		xPosition = (int) ((1280 - width) * Math.random());
+		yPosition = (int) ((720 - height) * Math.random());
+		this.setRect(xPosition, yPosition, width, height);
+		xSpeedStart = 35;
+		ySpeedStart = 35;
+		xSpeed = 35;
+		ySpeed = 35;
+		points = 100;
+		pointsStart = 100;
+	}
+	
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	@Override
+	public int getHeightBird() {
+		return height;
+	}
+
+	@Override
+	public int getWidthBird() {
+		return width;
+	}
+	
+	@Override
+	public int getXPosition() {
+		return xPosition;
+	}
+
+	@Override
+	public int getYPosition() {
+		return yPosition;
+	}
+	
+	@Override
+	public void setXPosition(int xPos) {
+		 xPosition = xPos;
+	}
+
+
+	@Override
+	public void setYPosition(int yPos) {
+		yPosition = yPos;
+	}
+	
+	@Override
+	public double getXSpeed() {
+		return xSpeed;
+	}
+
+	@Override
+	public double getYSpeed() {
+		return ySpeed;
+	}
+	
+	@Override
+	public int getPoints() {
+		return points;
+	}
+	
+	@Override
+	public void ratioMultiplier(double speedR, int heightR, int widthR, int pointsR) {
+		xSpeed = xSpeedStart * speedR;
+		ySpeed = ySpeedStart * speedR;
+//		height = heightStart * heightR;
+//		width = widthStart * widthR;
+		points = pointsStart * pointsR;
+	}
+	
+	@Override
+	public void draw(Graphics g, BufferedImage b) {
+		g.drawImage(b, xPosition, yPosition, widthStart, heightStart, null);
+	}
+	
+
+	@Override
+	public void move() {
+		xPosition = (int) (xPosition + (xSpeed * Math.pow(-1, Math.round(Math.random()))));
+		yPosition = (int) (yPosition + (ySpeed * Math.pow(-1, Math.round(Math.random()))));
+		this.setRect(xPosition, yPosition, width * 2, height * 2);
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	@Override
+	public void swarm(Graphics g, BufferedImage b) {
+		return;
+	}
+}
